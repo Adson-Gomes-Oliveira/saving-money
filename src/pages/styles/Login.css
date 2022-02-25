@@ -1,0 +1,80 @@
+/* General Settings */
+.login {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  background-color: #DFDCE3;
+}
+
+/* Form Settings */
+.login form {
+  align-items: center;
+  background-color: var(--base-color-theme);
+  display: flex;
+  flex-direction: column;
+  height: 25rem;
+  justify-content: space-evenly;
+  width: 20.625rem;
+  border: 4px solid var(--light-base-color-theme);
+}
+
+.login h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 33px;
+  color: white;
+  margin-left: 10%;
+}
+
+.login h1 span:first-of-type {
+  z-index: 1;
+}
+
+.login h1 .material-icons-outlined {
+  position: relative;
+  right: 10%;
+  font-size: 60px;
+  color: var(--darken-base-color-theme);
+  z-index: 0;
+}
+
+/* Inputs Settings */
+.login-area {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -8%;
+  
+}
+
+.login-area input {
+  width: 16.875rem;
+  height: var(--large-spacing);
+  border: none;
+  margin: var(--min-spacing) 0;
+  padding-left: var(--small-spacing);
+  font-weight: 700;
+  color: var(--darken-base-color-theme);
+}
+
+.login-area input:focus {
+  outline: var(--light-base-color-theme) solid 2px;
+}
+
+/* Button Settings */
+
+.login-area button:disabled {
+  background-color: var(--gray-color-theme);
+}
+
+.login-area button {
+  margin-top: 5%;
+  padding: var(--default-spacing) var(--small-spacing);
+  font-weight: 700;
+  border: none;
+  background-color: var(--yellow-color-theme);
+  font-size: 14px;
+  color: white
+}
