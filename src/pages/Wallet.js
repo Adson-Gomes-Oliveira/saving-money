@@ -1,9 +1,15 @@
 import React from 'react';
-import Header from '../component/Header';
+import ExpensesPanel from '../components/ExpensesPanel';
+import Header from '../components/Header';
 
 class Wallet extends React.Component {
   render() {
-    return <Header />;
+    return (
+      <section className="wallet">
+        <Header />
+        <ExpensesPanel />
+      </section>
+    );
   }
 }
 

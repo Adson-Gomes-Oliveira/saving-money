@@ -1,0 +1,35 @@
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+header h1 {
+  align-items: center;
+  background-color: var(--base-color-theme);
+  color: white;
+  display: flex;
+  font-size: var(--large-spacing);
+  margin: 0;
+  padding: var(--small-spacing);
+}
+
+header h1 span:first-of-type {
+  z-index: 1;
+}
+
+header h1 .material-icons-outlined {
+  color: var(--darken-base-color-theme);
+  font-size: var(--extra-large-spacing);
+  position: relative;
+  right: 10%;
+  z-index: 0;
+}
+
+.user-infos {
+  align-items: center;
+  display: flex;
+  height: 5rem;
+  justify-content: space-around;
+  width: 40%;
+}

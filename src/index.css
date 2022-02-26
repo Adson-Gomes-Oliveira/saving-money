@@ -4,21 +4,21 @@
   --default-spacing: 0.937rem;
   --large-spacing: 1.875rem;
   --extra-large-spacing: 3.75rem;
-  --base-color-theme: #4bbead;
-  --darken-base-color-theme: #083630;
-  --light-base-color-theme: #318f81;
-  --yellow-color-theme: #f7b733;
-  --gray-color-theme: #dfdce3;
+  --base-color-theme: #749757;
+  --darken-base-color-theme: #223322;
+  --light-base-color-theme:#436444;
+  --yellow-color-theme: #af4f4d;
+  --gray-color-theme: #f0e8d2;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
 }
 
 code {

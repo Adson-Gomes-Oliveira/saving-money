@@ -1,30 +1,31 @@
-/* General Settings */
+/* ----------- General Settings ----------- */
 .login {
   align-items: center;
+  background: url('../../assets/back_login.jpg');
+  background-size: cover;
   display: flex;
   height: 100vh;
   justify-content: center;
-  background-color: #DFDCE3;
 }
 
-/* Form Settings */
+/* ----------- Form Settings ----------- */
 .login form {
   align-items: center;
   background-color: var(--base-color-theme);
+  border: 0.25rem solid var(--light-base-color-theme);
   display: flex;
   flex-direction: column;
   height: 25rem;
   justify-content: space-evenly;
   width: 20.625rem;
-  border: 4px solid var(--light-base-color-theme);
 }
 
 .login h1 {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 33px;
   color: white;
+  display: flex;
+  font-size: 2.062rem;
+  justify-content: center;
   margin-left: 10%;
 }
 
@@ -33,48 +34,47 @@
 }
 
 .login h1 .material-icons-outlined {
+  color: var(--darken-base-color-theme);
+  font-size: var(--extra-large-spacing);
   position: relative;
   right: 10%;
-  font-size: 60px;
-  color: var(--darken-base-color-theme);
   z-index: 0;
 }
 
-/* Inputs Settings */
+/* ----------- Inputs Settings ----------- */
 .login-area {
   display: flex;
   flex-direction: column;
   position: relative;
   top: -8%;
-  
 }
 
 .login-area input {
-  width: 16.875rem;
-  height: var(--large-spacing);
   border: none;
+  color: var(--darken-base-color-theme);
+  font-weight: 700;
+  height: var(--large-spacing);
   margin: var(--min-spacing) 0;
   padding-left: var(--small-spacing);
-  font-weight: 700;
-  color: var(--darken-base-color-theme);
+  width: 16.875rem;
 }
 
 .login-area input:focus {
   outline: var(--light-base-color-theme) solid 2px;
 }
 
-/* Button Settings */
+/* ----------- Button Settings ----------- */
+.login-area button {
+  background-color: var(--yellow-color-theme);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-top: 5%;
+  padding: var(--default-spacing) var(--small-spacing);
+}
 
 .login-area button:disabled {
   background-color: var(--gray-color-theme);
-}
-
-.login-area button {
-  margin-top: 5%;
-  padding: var(--default-spacing) var(--small-spacing);
-  font-weight: 700;
-  border: none;
-  background-color: var(--yellow-color-theme);
-  font-size: 14px;
-  color: white
 }
