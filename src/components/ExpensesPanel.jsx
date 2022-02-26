@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import Proptypes from 'prop-types';
+import { connect } from 'react-redux';
 import './styles/ExpensesPanel.css';
 
 class ExpensesPanel extends Component {
   render() {
+    const { currencies } = this.props;
+    const currencyOptions = currencies.map((currency) => (
+      <option
+        key={ currency }
+        data-testid={ currency }
+        value={ currency }
+      >
+        {currency}
+      </option>
+    ));
     return (
       <section>
         <form className="panel-add-expenses">
@@ -14,7 +26,7 @@ class ExpensesPanel extends Component {
           <label htmlFor="currency">
             <span>Moeda:</span>
             <select data-testid="currency-input">
-              <option value="brl">BRL</option>
+              {currencyOptions}
             </select>
           </label>
 
@@ -50,4 +62,12 @@ class ExpensesPanel extends Component {
   }
 }
 
-export default ExpensesPanel;
+ExpensesPanel.propTypes = {
+  currencies: Proptypes.arr,
+}.isRequired;
+
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
+export default connect(mapStateToProps, null)(ExpensesPanel);
