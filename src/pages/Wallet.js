@@ -15,12 +15,12 @@ class Wallet extends React.Component {
   render() {
     const { isLoading } = this.props;
     return (
-      isLoading ? <Loading /> : (
-        <section className="wallet">
-          <Header />
+      <section className="wallet">
+        <Header />
+        {isLoading ? <Loading /> : (
           <ExpensesPanel />
-        </section>
-      )
+        )}
+      </section>
     );
   }
 }

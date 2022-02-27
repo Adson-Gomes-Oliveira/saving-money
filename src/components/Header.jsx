@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import Proptypes from 'prop-types';
 import './styles/Header.css';
 
 class Header extends Component {
   render() {
-    const { userEmail } = this.props;
+    const { userEmail, expenses } = this.props;
+    const allValues = [];
+    expenses.forEach((expanse) => {
+      const currencies = Object.values(expanse.exchangeRates);
+      const quote = currencies.find((curr) => curr.code === expanse.currency).ask;
+      allValues.push(expanse.value * quote);
+    });
+    const totalAmount = allValues.length > 0
+      ? allValues.reduce((prev, crr) => crr + prev) : 0;
     return (
       <header>
         <h1>
@@ -16,7 +24,9 @@ class Header extends Component {
           <span className="email" data-testid="email-field">{userEmail}</span>
           <div className="total-expanse">
             <span>Despesas Totais: </span>
-            <span data-testid="total-field">R$0</span>
+            <span data-testid="total-field">
+              {totalAmount.toFixed(2)}
+            </span>
             <span data-testid="header-currency-field">BRL</span>
           </div>
         </div>
@@ -26,11 +36,13 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  userEmail: PropTypes.string.isRequired,
-};
+  userEmail: Proptypes.string,
+  expenses: Proptypes.arr,
+}.isRequired;
 
 const mapStateToProps = (state) => ({
   userEmail: state.user.email,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps, null)(Header);

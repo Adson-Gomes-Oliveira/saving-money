@@ -3,7 +3,7 @@ const getCurrencies = async () => {
   const responseObject = await response.json();
   const prevCurrencies = Object.keys(responseObject);
   const currencies = prevCurrencies.filter((curr) => curr !== 'USDT');
-  return currencies;
+  return [currencies, responseObject];
 };
 
 export default getCurrencies;

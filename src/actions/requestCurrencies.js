@@ -24,7 +24,8 @@ export const requestCurrencies = () => async (dispatch) => {
   dispatch(loadingReq());
   try {
     const getData = await getCurrencies();
-    dispatch(currencySuccess(getData));
+    const currencies = getData[0];
+    dispatch(currencySuccess(currencies));
   } catch (error) {
     dispatch(currenciesError(error));
   }
