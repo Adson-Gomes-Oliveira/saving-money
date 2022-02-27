@@ -5,6 +5,7 @@ import { requestCurrencies } from '../actions/requestCurrencies';
 import ExpensesPanel from '../components/ExpensesPanel';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+import Spreadsheet from '../components/Spreadsheet';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -17,9 +18,8 @@ class Wallet extends React.Component {
     return (
       <section className="wallet">
         <Header />
-        {isLoading ? <Loading /> : (
-          <ExpensesPanel />
-        )}
+        { isLoading ? <Loading /> : <ExpensesPanel /> }
+        <Spreadsheet />
       </section>
     );
   }
