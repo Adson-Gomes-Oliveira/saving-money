@@ -1,28 +1,22 @@
 .spreadsheet {
   background-image: linear-gradient(#3d3d3d, #141414);
   height: 3.2rem;
+  text-align: center;
   width: 100%;
 }
 
+.rows td {
+  background-color: white;
+  padding: var(--min-spacing);
+}
+
+.rows td:first-of-type {
+  font-weight: 700;
+}
+
 .columns th {
-  border-right: 2px solid #4d4d4d;
   color: white;
-}
-
-.columns th:nth-child( 1 ) {
-  width: 270px;
-}
-
-.columns th:nth-child( 2 ) {
-  width: 60px;
-}
-
-.columns th:nth-child( 3 ) {
-  width: 150px;
-}
-
-.columns th:nth-child( 4 ) {
-  width: 90px;
+  padding: var(--small-spacing);
 }
 
 .columns th:last-of-type {
