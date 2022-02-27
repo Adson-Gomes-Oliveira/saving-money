@@ -22,3 +22,21 @@
 .columns th:last-of-type {
   border: none;
 }
+
+.rows td button {
+  border: none;
+  border-radius: var(--min-spacing);
+  color: white;
+  cursor: pointer;
+  margin: 0 var(--min-spacing);
+  padding: var(--min-spacing);
+}
+
+.rows td button:first-of-type {
+  background-color: yellow;
+  color: black;
+}
+
+.rows td button:last-of-type {
+  background-color: red;
+}

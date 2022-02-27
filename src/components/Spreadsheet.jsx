@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpanse } from '../actions';
 import './styles/Spreadsheet.css';
 
 class Spreadsheet extends Component {
+  handleDelete = (id) => {
+    const { deleteExp } = this.props;
+    deleteExp(id);
+  }
+
   render() {
     const { expenseStored } = this.props;
     console.log(expenseStored);
@@ -38,7 +44,23 @@ class Spreadsheet extends Component {
                   {parseFloat(value * exchangeRates[currency].ask).toFixed(2)}
                 </td>
                 <td role="cell">Real</td>
-                <td role="cell">E/D</td>
+                <td role="cell">
+                  <button
+                    type="button"
+                    data-testid="edit-btn"
+                    className="material-icons-outlined"
+                  >
+                    edit
+                  </button>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    className="material-icons-outlined"
+                    onClick={ () => this.handleDelete(exp.id) }
+                  >
+                    delete
+                  </button>
+                </td>
               </tr>
             );
           })}
@@ -50,10 +72,15 @@ class Spreadsheet extends Component {
 
 Spreadsheet.propTypes = {
   expenseStored: PropTypes.arr,
+  deleteExp: PropTypes.func,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
   expenseStored: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps, null)(Spreadsheet);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExp: (id) => dispatch(deleteExpanse(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Spreadsheet);

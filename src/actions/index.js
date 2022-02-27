@@ -1,5 +1,6 @@
 export const SAVE_EMAIL = 'SAVE_EMAIL';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const storeEmail = (email) => ({
   type: SAVE_EMAIL,
@@ -20,5 +21,12 @@ export const storeExpenses = (expense) => ({
       tag: expense.tag,
       exchangeRates: expense.exchangeRates,
     },
+  },
+});
+
+export const deleteExpanse = (expenseId) => ({
+  type: DELETE_EXPENSE,
+  payload: {
+    expenseId,
   },
 });
