@@ -1,12 +1,12 @@
 header {
   align-items: center;
+  background-color: var(--base-color-theme);
   display: flex;
   justify-content: space-between;
 }
 
 header h1 {
   align-items: center;
-  background-color: var(--base-color-theme);
   color: white;
   display: flex;
   font-size: var(--large-spacing);
@@ -28,6 +28,7 @@ header h1 .material-icons-outlined {
 
 .user-infos {
   align-items: center;
+  color: white;
   display: flex;
   height: 5rem;
   justify-content: space-around;

@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteExpanse } from '../actions';
+import { deleteExpanse, editExpanse } from '../actions';
 import './styles/Spreadsheet.css';
 
 class Spreadsheet extends Component {
+  componentDidUpdate() {
+    console.log('Atualizou');
+  }
+
+  handleEdit = (expense) => {
+    const { editExp } = this.props;
+    editExp(expense);
+  }
+
   handleDelete = (id) => {
     const { deleteExp } = this.props;
     deleteExp(id);
@@ -12,7 +21,7 @@ class Spreadsheet extends Component {
 
   render() {
     const { expenseStored } = this.props;
-    console.log(expenseStored);
+
     return (
       <table className="spreadsheet">
         <thead>
@@ -49,6 +58,7 @@ class Spreadsheet extends Component {
                     type="button"
                     data-testid="edit-btn"
                     className="material-icons-outlined"
+                    onClick={ () => this.handleEdit(exp) }
                   >
                     edit
                   </button>
@@ -73,6 +83,7 @@ class Spreadsheet extends Component {
 Spreadsheet.propTypes = {
   expenseStored: PropTypes.arr,
   deleteExp: PropTypes.func,
+  editExp: PropTypes.func,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
@@ -81,6 +92,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExp: (id) => dispatch(deleteExpanse(id)),
+  editExp: (id) => dispatch(editExpanse(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Spreadsheet);

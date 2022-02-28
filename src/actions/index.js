@@ -1,6 +1,10 @@
 export const SAVE_EMAIL = 'SAVE_EMAIL';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const SAVE_EDIT_EXPENSE = 'SAVE_EDIT_EXPENSE';
+export const CHANGE_PANEL_STATE = 'CHANGE_PANEL_STATE';
+export const RESET_PANEL_STATE = 'RESET_PANEL_STATE';
 
 export const storeEmail = (email) => ({
   type: SAVE_EMAIL,
@@ -29,4 +33,27 @@ export const deleteExpanse = (expenseId) => ({
   payload: {
     expenseId,
   },
+});
+
+export const editExpanse = (expense) => ({
+  type: EDIT_EXPENSE,
+  payload: {
+    expense,
+    isEditing: true,
+  },
+});
+
+export const changePanelState = (change) => ({
+  type: CHANGE_PANEL_STATE,
+  change,
+});
+
+export const resetState = (original) => ({
+  type: RESET_PANEL_STATE,
+  original,
+});
+
+export const saveEditedExpense = (editedExpense) => ({
+  type: SAVE_EDIT_EXPENSE,
+  editedExpense,
 });

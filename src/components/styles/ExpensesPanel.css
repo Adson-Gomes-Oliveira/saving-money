@@ -1,9 +1,14 @@
-.panel-add-expenses {
+.control-panel {
+  align-items: center;
   background-color: #0a0a0a;
   color: white;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 1.25rem;
+}
+
+.panel-add-expenses label {
+  margin: 0 var(--min-spacing);
 }
 
 .panel-add-expenses label span {
@@ -11,7 +16,7 @@
 }
 
 .panel-add-expenses input {
-  padding: var(--min-spacing);
+  padding: var(--small-spacing) var(--small-spacing);
   width: 12.5rem;
 }
 
@@ -24,5 +29,27 @@
 }
 
 .panel-add-expenses select {
-  padding: var(--min-spacing) var(--small-spacing);
+  padding: var(--small-spacing) var(--small-spacing);
+}
+
+.add-btn {
+  background-color: #6c3bdd;
+  border: 4px solid #5926cf;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  padding: var(--small-spacing);
+  width: 170px;
+}
+
+.edit-btn {
+  background-color: #ddbf3b;
+  border: 4px solid #c4a20f;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  font-weight: 700;
+  padding: var(--small-spacing);
+  width: 170px;
 }

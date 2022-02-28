@@ -1,4 +1,4 @@
-import { DELETE_EXPENSE, SAVE_EXPENSE } from '../actions';
+import { DELETE_EXPENSE, SAVE_EDIT_EXPENSE, SAVE_EXPENSE } from '../actions';
 import { ERROR_CURRENCY_REQ,
   LOADING, SUCESS_CURRENCY_REQ } from '../actions/requestCurrencies';
 
@@ -39,6 +39,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...state.expenses.filter((exp) => exp.id !== action.payload.expenseId)],
+    };
+
+  case SAVE_EDIT_EXPENSE:
+    return {
+      ...state,
+      expenses: [...action.editedExpense],
     };
 
   default:

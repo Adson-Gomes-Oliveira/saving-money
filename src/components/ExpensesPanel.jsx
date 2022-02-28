@@ -1,69 +1,82 @@
 import React, { Component } from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './styles/ExpensesPanel.css';
 import getCurrencies from '../services/currencyAPI';
-import { storeExpenses } from '../actions';
-
-const INPUT_TAG_INITIAL = 'Alimentação';
+import { changePanelState, resetState,
+  saveEditedExpense, storeExpenses } from '../actions';
 
 class ExpensesPanel extends Component {
-  constructor() {
-    super();
-    this.state = {
+  handleEditClick = () => {
+    const { initialStates, idEdit, dispatchToEdit,
+      expenseState, resetStateWithObject } = this.props;
+    expenseState.forEach((exp) => {
+      if (exp.id === idEdit) {
+        exp.value = initialStates.inputValue;
+        exp.description = initialStates.inputDesc;
+        exp.currency = initialStates.inputCurrency;
+        exp.method = initialStates.inputMethod;
+        exp.tag = initialStates.inputTag;
+      }
+    });
+    dispatchToEdit(expenseState);
+
+    const initialStateObject = {
+      edit: false,
       inputValue: 0,
       inputCurrency: 'USD',
       inputMethod: 'Dinheiro',
-      inputTag: INPUT_TAG_INITIAL,
+      inputTag: 'Transporte',
       inputDesc: '',
-      disableButton: true,
     };
+    resetStateWithObject(initialStateObject);
   }
 
   handleChange = ({ target }) => {
     const { value, name } = target;
-    this.setState({ [name]: value }, () => {
-      const { inputValue, inputDesc } = this.state;
-      const verifyLength = [inputValue, inputDesc];
-      this.setState({
-        disableButton: verifyLength.includes(''),
-      });
-    });
+    const { dispatchChange } = this.props;
+    const change = {
+      input: name,
+      value,
+    };
+    dispatchChange(change);
   };
 
   handleClick = async () => {
-    const { inputValue, inputCurrency, inputMethod, inputTag, inputDesc } = this.state;
-    const { saveExpanses, expensesLength } = this.props;
+    const { initialStates, saveExpanses,
+      expensesLength, resetStateWithObject } = this.props;
     const getData = await getCurrencies();
     const exchange = getData[1];
 
     const expense = {
       id: expensesLength,
-      value: inputValue,
-      description: inputDesc,
-      currency: inputCurrency,
-      method: inputMethod,
-      tag: inputTag,
+      value: initialStates.inputValue,
+      description: initialStates.inputDesc,
+      currency: initialStates.inputCurrency,
+      method: initialStates.inputMethod,
+      tag: initialStates.inputTag,
       exchangeRates: exchange,
     };
-
     saveExpanses(expense);
-    this.setState({
+
+    const initialStateObject = {
+      edit: false,
       inputValue: 0,
       inputCurrency: 'USD',
       inputMethod: 'Dinheiro',
-      inputTag: INPUT_TAG_INITIAL,
+      inputTag: 'Alimentação',
       inputDesc: '',
-      disableButton: true,
-    });
+    };
+    resetStateWithObject(initialStateObject);
   };
 
   render() {
-    const { currencies } = this.props;
-    const { inputValue, inputDesc, disableButton,
-      inputCurrency, inputMethod, inputTag } = this.state;
+    const { currencies, isEditing, initialStates } = this.props;
     return (
-      <section>
+      <section
+        className="control-panel"
+        style={ isEditing ? { backgroundColor: '#436444' } : null }
+      >
         <form className="panel-add-expenses">
           <label htmlFor="value">
             <span>Valor:</span>
@@ -74,7 +87,7 @@ class ExpensesPanel extends Component {
               data-testid="value-input"
               className="value"
               onChange={ this.handleChange }
-              value={ inputValue }
+              value={ initialStates.inputValue }
             />
           </label>
 
@@ -85,7 +98,7 @@ class ExpensesPanel extends Component {
               name="inputCurrency"
               data-testid="currency-input"
               onChange={ this.handleChange }
-              value={ inputCurrency }
+              value={ initialStates.inputCurrency }
             >
               {currencies.map((currency) => (
                 <option
@@ -106,7 +119,7 @@ class ExpensesPanel extends Component {
               name="inputMethod"
               data-testid="method-input"
               onChange={ this.handleChange }
-              value={ inputMethod }
+              value={ initialStates.inputMethod }
             >
               <option value="Dinheiro">Dinheiro</option>
               <option value="Cartão de crédito">Cartão de crédito</option>
@@ -121,7 +134,7 @@ class ExpensesPanel extends Component {
               name="inputTag"
               data-testid="tag-input"
               onChange={ this.handleChange }
-              value={ inputTag }
+              value={ initialStates.inputTag }
             >
               <option value="Alimentação">Alimentação</option>
               <option value="Lazer">Lazer</option>
@@ -139,36 +152,60 @@ class ExpensesPanel extends Component {
               type="text"
               data-testid="description-input"
               onChange={ this.handleChange }
-              value={ inputDesc }
+              value={ initialStates.inputDesc }
             />
           </label>
-
-          <button
-            type="button"
-            disabled={ disableButton }
-            onClick={ this.handleClick }
-          >
-            Adicionar despesa
-          </button>
         </form>
+        <div className="buttons">
+          {isEditing ? (
+            <button
+              type="button"
+              onClick={ this.handleEditClick }
+              className="edit-btn"
+            >
+              Editar despesa
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={ this.handleClick }
+              className="add-btn"
+            >
+              Adicionar despesa
+            </button>
+          )}
+        </div>
       </section>
     );
   }
 }
 
 ExpensesPanel.propTypes = {
-  currencies: Proptypes.arr,
-  saveExpanses: Proptypes.func,
-  expensesLength: Proptypes.number,
+  currencies: PropTypes.arr,
+  saveExpanses: PropTypes.func,
+  expensesLength: PropTypes.number,
+  initialStates: PropTypes.shape,
+  isEditing: PropTypes.bool,
+  dispatchChange: PropTypes.func,
+  resetStateWithObject: PropTypes.func,
+  dispatchToEdit: PropTypes.func,
+  idEdit: PropTypes.number,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expensesLength: state.wallet.expenses.length,
+  initialStates: state.controlPanel,
+  isEditing: state.controlPanel.edit,
+  idEdit: state.controlPanel.expenseID,
+  expenseState: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   saveExpanses: (expense) => dispatch(storeExpenses(expense)),
+  dispatchChange: (value) => dispatch(changePanelState(value)),
+  resetStateWithObject: (object) => dispatch(resetState(object)),
+  dispatchToEdit: (object) => dispatch(saveEditedExpense(object)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesPanel);
