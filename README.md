@@ -21,7 +21,6 @@ com a conversão dessas moedas para real sendo realizada automaticamente.
 
 > Aproveite !! :smile:
 <br>
-Well, you asked for it!
 </details>
 <br />
 <h4>TECNOLOGIAS UTILIZADAS</h4>
